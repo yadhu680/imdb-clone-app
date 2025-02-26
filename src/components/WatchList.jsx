@@ -11,8 +11,6 @@ function WatchList() {
   const [genreList, setGenreList] = useState(['All Genres']);
   const [currGenre, setCurrGenre] = useState('All Genres');
 
-  console.log(handleRemoveFromWatchlist);
-
   let handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -43,15 +41,15 @@ function WatchList() {
     });
     temp = new Set(temp);
     setGenreList(['All Genres', ...temp]);
-    console.log(temp);
   }, [watchlist]);
 
   return (
     <>
       <div className="flex justify-center flex-wrap m-4">
-        {genreList.map((genre) => {
+        {genreList.map((genre, i) => {
           return (
             <div
+              key={i}
               onClick={() => handleFilter(genre)}
               className={
                 currGenre == genre
@@ -116,7 +114,7 @@ function WatchList() {
               })
               .map((movieObj) => {
                 return (
-                  <tr className="border-b-2">
+                  <tr className="border-b-2" key={movieObj.id}>
                     <td className="flex items-center px-6 py-4">
                       <img
                         className="h-[6rem] w-[10rem]"
